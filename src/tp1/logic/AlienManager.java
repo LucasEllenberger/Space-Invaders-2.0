@@ -18,7 +18,7 @@ public class AlienManager  {
 		initializeDestroyerAliens(container);
 		
 		//TODO fill with your code
-		
+		System.out.println("Github test");
 		
 		return container;
 	}
