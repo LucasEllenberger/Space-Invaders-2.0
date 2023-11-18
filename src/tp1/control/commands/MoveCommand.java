@@ -45,6 +45,7 @@ public class MoveCommand extends Command {
 	@Override
 	public Command parse(String[] commandWords) {
         //TODO fill with your code
+		System.out.println(commandWords);
 	    return null;
 	}
 
