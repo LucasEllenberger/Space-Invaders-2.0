@@ -80,20 +80,28 @@ public class Game implements GameStatus {
 
 	@Override
 	public boolean playerWin() {
-		// TODO fill with your code
-		return false;
+		// TODO TEST!!
+		return (alienManager.getRemainingAliens() == 0);
 	}
 
 	@Override
 	public boolean aliensWin() {
-		// TODO fill with your code
+		if (player.) {
+			return true;
+		}
+//		for (Entity entity : entities) {
+//			if ((entity instanceof RegularAlien || entity instanceof DestroyerAlien) 
+//					&& Position.onLastRow(entity.getPosition())) {
+//				return true;
+//			}
+//		}
 		return false;
 	}
 
 	@Override
 	public int getCycle() {
-		// TODO fill with your code
-		return 0;
+		// TODO TEST!!
+		return currentCycle;
 	}
 
 	@Override

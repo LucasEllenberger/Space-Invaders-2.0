@@ -6,7 +6,7 @@ import tp1.logic.Move;
 import tp1.logic.Position;
 import tp1.view.Messages;
 
-public class RegularAlien extends GameObject {
+public class RegularAlien extends AlienShip {
 	
 	private static Move direction = Move.LEFT;
 	private Game game;

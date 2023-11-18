@@ -44,8 +44,22 @@ public class MoveCommand extends Command {
 
 	@Override
 	public Command parse(String[] commandWords) {
-        //TODO fill with your code
-		System.out.println(commandWords);
+        //TODO TEST!!
+		if (this.matchCommandName(commandWords[0]) && commandWords.length > 1) {
+			Move move = switch (commandWords[1]) {
+		    case "right" -> Move.RIGHT;
+		    case "rright" -> Move.RRIGHT;
+		    case "left" -> Move.LEFT;
+		    case "lleft" -> Move.LLEFT;
+		    case "up" -> Move.UP;
+		    case "down" -> Move.DOWN;
+		    case "none" -> Move.NONE;
+		    default -> null;
+			};
+			if (move != null) {
+				return new MoveCommand(move);
+			}
+		}
 	    return null;
 	}
 
