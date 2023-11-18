@@ -11,7 +11,7 @@ public class RegularAlien extends AlienShip {
 	private static Move direction = Move.LEFT;
 	private Game game;
 	private Position position;
-	private int health = 2;
+	private int life = 2;
 	
 	public RegularAlien(Game game, Position pos, AlienManager alienManager) {
 		// TODO fill with your code
@@ -21,8 +21,8 @@ public class RegularAlien extends AlienShip {
 	public RegularAlien(Game game, Position position) {
 		this.game = game;
 		this.position = position;
-		game.changeMetric("aliens", 1);
-		game.add(this);
+//		game.changeMetric("aliens", 1);
+//		game.add(this);
 	}
 	
 	public Position getPosition() {
