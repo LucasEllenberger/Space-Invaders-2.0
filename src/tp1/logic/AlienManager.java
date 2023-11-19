@@ -42,5 +42,10 @@ public class AlienManager  {
 		return remainingAliens;
 	}
 
+	public boolean onLastRow() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 
 }

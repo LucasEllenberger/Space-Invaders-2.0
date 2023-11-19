@@ -1,7 +1,15 @@
 package tp1.logic;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 import tp1.logic.gameobjects.GameObject;
+import tp1.logic.gameobjects.Space;
+import tp1.logic.gameobjects.UCMLaser;
 import tp1.logic.gameobjects.UCMShip;
+import tp1.logic.gameobjects.Ufo;
+import tp1.view.Messages;
 
 
 public class Game implements GameStatus {
@@ -16,10 +24,36 @@ public class Game implements GameStatus {
 	private AlienManager alienManager;
 	private int currentCycle;
 	
+	private long seed;
+	private Move direction = Move.LEFT;
+	private Level level;
+	private Random random;
+	private Space space = new Space();
+	private UCMLaser currentLaser;
+	private Ufo ufo = new Ufo(this, null);
+//	private GameObject[][] board;
+	private Map<String, Boolean> state = new HashMap<String, Boolean>() {{
+        put("laser", false);
+        put("edge", false);
+        put("ufo", false);
+        put("shockwave", false);
+        put("running", true);
+   }};
+	private Map<String, Integer> metrics = new HashMap<String, Integer>() {{
+	     put("points", 0);
+	     put("cycles", 0);
+	     put("aliens", 0);
+	     put("speed", 0);
+	     put("wait", 0);
+	}};
+	
 	//TODO fill with your code
 
-	public Game (Level level, long seed){
+	public Game (Level level, long seed) {
 		//TODO fill with your code
+		this.level = level;
+        this.seed = seed;
+        this.random = new Random(seed);
 		initGame();
 	}
 		
@@ -29,16 +63,60 @@ public class Game implements GameStatus {
 		this.player = new UCMShip(this, new Position(DIM_X / 2, DIM_Y - 1));
 		//container.add(player);
 	}
+	
+	/**
+	 * Change boolean game attributes
+	 * 
+	 * @param field Name of attribute
+	 * @param value Value that the attribute should be
+	 */
+	public void changeState(String field, Boolean value) {
+		state.put(field, value);
+	}
+	
+	/**
+	 * Access boolean game attributes
+	 * 
+	 * @param field Name of attribute 
+	 * @return Boolean value corresponding to attribute
+	 */
+	
+	public boolean getState(String field) {
+		return state.get(field);
+	}
+	
+	/**
+	 * Access integer game attributes
+	 * 
+	 * @param field Name of attribute 
+	 * @return Integer value corresponding to attribute
+	 */
+	
+	public int getMetric(String field) {
+		return metrics.get(field);
+	}
+	
+	/**
+	 * Change integer game attributes
+	 * 
+	 * @param field Name of attribute
+	 * @param value Value that the attribute should be
+	 */
+	
+	public void changeMetric(String field, int value) {
+		metrics.put(field, metrics.get(field) + value);
+	}
 
 	//CONTROL METHODS
 	
 	public boolean isFinished() {
-		// TODO fill with your code
-		return false;
+		// TODO TEST!!
+		return (playerWin() || aliensWin() || getState("finished"));
 	}
 
 	public void exit() {
 		// TODO fill with your code
+		changeState("finished", true);
 	}
 
 	public void update() {
@@ -51,8 +129,22 @@ public class Game implements GameStatus {
 
 	//CALLBACK METHODS
 	
+	/**
+	 * Returns a value that determines when it is permitted to move for entities that are affected by speed
+	 * 
+	 * @return A boolean representing whether the cycle and speed coincide
+	 */
+	
+	public boolean shouldMove() {
+		return (getState("edge") || (getMetric("wait") == getMetric("speed")));
+	}
+	
 	public void addObject(GameObject object) {
 	    this.container.add(object);
+	}
+	
+	public void removeObject(GameObject object) {
+		this.container.remove(object);
 	}
 
 	// TODO fill with your code
@@ -60,8 +152,8 @@ public class Game implements GameStatus {
 	//VIEW METHODS
 	
 	public String positionToString(int col, int row) {
-		return null;
-		//return container.toString(new Position(col, row));
+//		return board[row][col].getSymbol();
+		return container.toString(new Position(col, row));
 	}
 	
 	
@@ -74,8 +166,14 @@ public class Game implements GameStatus {
 
 	@Override
 	public String stateToString() {
-		// TODO fill with your code
-		return null;
+		StringBuilder buffer = new StringBuilder();
+		String NEW_LINE = System.lineSeparator();
+		String SPACE = " ";
+		buffer.append(Messages.LIFE).append(SPACE).append(player.getLife()).append(NEW_LINE)
+		.append(Messages.POINTS).append(SPACE).append(getMetric("points")).append(NEW_LINE)
+		.append(Messages.SHOCKWAVE).append(SPACE).append(getState("shockwave") ? "ON" : "OFF").append(NEW_LINE);
+		return buffer.toString();
+//		return null;
 	}
 
 	@Override
@@ -86,16 +184,13 @@ public class Game implements GameStatus {
 
 	@Override
 	public boolean aliensWin() {
-		if (player.) {
-			return true;
-		}
+		return (player.isAlive() || alienManager.onLastRow());
 //		for (Entity entity : entities) {
 //			if ((entity instanceof RegularAlien || entity instanceof DestroyerAlien) 
 //					&& Position.onLastRow(entity.getPosition())) {
 //				return true;
 //			}
 //		}
-		return false;
 	}
 
 	@Override
@@ -107,7 +202,14 @@ public class Game implements GameStatus {
 	@Override
 	public int getRemainingAliens() {
 		// TODO fill with your code
-		return 0;
+		return alienManager.getRemainingAliens();
 	}
 
+	public Random getRandom() {
+		return this.random;
+	}
+
+	public Level getLevel() {
+		return this.level;
+	}
 }

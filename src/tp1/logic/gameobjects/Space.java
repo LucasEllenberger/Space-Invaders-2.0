@@ -1,25 +1,27 @@
 package tp1.logic.gameobjects;
 
-import tp1.logic.Game;
 import tp1.logic.Position;
+import tp1.view.Messages;
 
-public class Ship extends GameObject {
+/**
+ * Class used to represent empty space on the board. In practice, there is only ever one Space object, and the latter 
+ * three methods should never be called.
+ */
+public class Space extends GameObject {
 
-	public Ship(Game game, Position pos, int life) {
-		super(game, pos, life);
+	public Space() {
+		super(null, null, 0);
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	@Override
-	public boolean isOnPosition(Position pos) {
-		// TODO TEST!!
-		return this.pos.equals(pos);
+	public String getSymbol() {
+		return Messages.EMPTY;
 	}
-
+	
 	@Override
-	protected String getSymbol() {
-		// TODO Auto-generated method stub
-		return null;
+	public void automaticMove() {
+		return;
 	}
 
 	@Override
@@ -41,9 +43,8 @@ public class Ship extends GameObject {
 	}
 
 	@Override
-	public void automaticMove() {
+	public boolean isOnPosition(Position pos) {
 		// TODO Auto-generated method stub
-		return;
+		return false;
 	}
-
 }

@@ -33,6 +33,11 @@ public class GameObjectContainer {
 		// TODO fill with your code
 	}
 
+	public String toString(Position position) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	//TODO fill with your code
 	
 }

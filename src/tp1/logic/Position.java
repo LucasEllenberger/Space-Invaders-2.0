@@ -92,4 +92,8 @@ public class Position {
 		int newCol = position.getCol() + move.getX();
 		position.set(newRow, newCol);
  	}
+	
+	public boolean equals(Position position) {
+		return (this.col == position.getCol() && this.row == position.getRow())
+	}
 }

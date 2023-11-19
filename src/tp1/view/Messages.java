@@ -71,6 +71,12 @@ public class Messages {
 	public static final String UNEXPECTED_RUNTIME_ERROR = "Oops!";
 	
 	public static final String SCORE = "Score:";
+	
+	public static final String POINTS = "Points:";
+	
+	public static final String LIFE = "Life:";
+	
+	public static final String SHOCKWAVE = "ShockWave:";
 
 	public static final String LASER_ERROR = "Laser cannot be shot";
 
@@ -116,6 +122,8 @@ public class Messages {
 	public static final String UFO_SYMBOL = "U";
 
 	public static final String UFO_DESCRIPTION = "U[f]o";
+	
+	public static final String EMPTY = "";
 
 	//Commands
 	
