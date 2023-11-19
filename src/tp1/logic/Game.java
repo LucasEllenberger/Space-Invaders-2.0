@@ -12,7 +12,7 @@ import tp1.logic.gameobjects.Ufo;
 import tp1.view.Messages;
 
 
-public class Game implements GameStatus {
+public class Game implements GameStatus, GameModel, GameWorld {
 
 	//TODO fill with your code
 
@@ -211,5 +211,23 @@ public class Game implements GameStatus {
 
 	public Level getLevel() {
 		return this.level;
+	}
+
+	@Override
+	public boolean move(Move move) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean shootLaser() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void reset() {
+		// TODO Auto-generated method stub
+		return;
 	}
 }

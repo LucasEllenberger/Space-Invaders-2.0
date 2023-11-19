@@ -16,6 +16,7 @@ import tp1.view.Messages;
  */
 public class Controller {
 
+	// TODO should convert to Game Model in the future
 	private Game game;
 	private Scanner scanner;
 	private GamePrinter printer;

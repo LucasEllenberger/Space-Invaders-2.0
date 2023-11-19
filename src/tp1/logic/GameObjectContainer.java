@@ -24,18 +24,27 @@ public class GameObjectContainer {
 	public void automaticMoves() {
 		for (int i=0;i<objects.size();i++) {
 				GameObject object = objects.get(i);
-			//TODO fill with your code
+				//TODO fill with your code
+				object.automaticMove();
 		}
 		//TODO fill with your code
 	}
 
 	public void computerActions() {
 		// TODO fill with your code
+		
 	}
 
 	public String toString(Position position) {
 		// TODO Auto-generated method stub
-		return null;
+		for (int i=0;i<objects.size();i++) {
+			GameObject object = objects.get(i);
+			//TODO fill with your code
+			if (object.getPos().equals(position)) {
+				return object.toString();
+			}
+	}
+		return "";
 	}
 
 	//TODO fill with your code
