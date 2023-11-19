@@ -13,20 +13,21 @@ public class RegularAlien extends AlienShip {
 	private Game game;
 	private Position position;
 	private int life;
+	private int armour = 2;
+	private int damage = 0;
 	private AlienManager alienManager;
 	
-	public RegularAlien(Game game, Position pos, AlienManager alienManager) {
-		// TODO TEST!!
-		super(game, pos, 2);
-		this.alienManager = alienManager;
-	}
-	
-//	public RegularAlien(Game game, Position position) {
-//		this.game = game;
-//		this.position = position;
-//		game.changeMetric("aliens", 1);
-//		game.add(this);
+//	public RegularAlien(Game game, Position pos, AlienManager alienManager) {
+//		// TODO TEST!!
+//		super(game, pos, 2);
+//		this.alienManager = alienManager;
 //	}
+	
+	public RegularAlien(Game game, Position pos) {
+		super(game, pos, 2);
+		game.changeMetric("aliens", 1);
+		game.addObject(this);
+	}
 	
 	public Position getPosition() {
 		return position;
@@ -41,7 +42,7 @@ public class RegularAlien extends AlienShip {
 		if (game.shouldMove()) {
 			Position.update(position, direction);
 			if (Position.onBorder(position) && !direction.equals(Move.DOWN)) {
-				game.changeState("edge", true);
+				game.changeState(getSymbol(), null);
 			}
 		}
 	}
@@ -59,7 +60,7 @@ public class RegularAlien extends AlienShip {
 	@Override
 	public boolean isOnPosition(Position pos) {
 		// TODO fill with your code
-		return false;
+		return this.pos.equals(pos);
 	}
 
 	@Override
@@ -71,18 +72,30 @@ public class RegularAlien extends AlienShip {
 	@Override
 	protected int getDamage() {
 		// TODO fill with your code
-		return 0;
+		return damage;
 	}
 
 	@Override
 	protected int getArmour() {
 		// TODO Auto-generated method stub
-		return 0;
+		return armour;
+	}
+	
+	@Override
+	public boolean receiveAttack(UCMWeapon weapon) {
+		this.life -= weapon.getDamage();
+		if (life <= 0) {
+			onDelete();
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public void onDelete() {
 		// TODO Auto-generated method stub
-
+		game.changeMetric("points", Attributes.RegularAlien.points);
+		game.changeMetric("aliens", -1);
+		game.removeObject(this);
 	}
 }
