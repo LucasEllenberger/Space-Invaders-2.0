@@ -94,6 +94,6 @@ public class Position {
  	}
 	
 	public boolean equals(Position position) {
-		return (this.col == position.getCol() && this.row == position.getRow())
+		return (this.col == position.getCol() && this.row == position.getRow());
 	}
 }

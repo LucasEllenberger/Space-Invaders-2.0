@@ -23,10 +23,11 @@ public class RegularAlien extends AlienShip {
 //		this.alienManager = alienManager;
 //	}
 	
-	public RegularAlien(Game game, Position pos) {
+	public RegularAlien(Game game, Position pos, AlienManager alienManager) {
 		super(game, pos, 2);
-		game.changeMetric("aliens", 1);
-		game.addObject(this);
+		this.alienManager = alienManager;
+//		game.changeMetric("aliens", 1);
+//		game.addObject(this);
 	}
 	
 	public Position getPosition() {

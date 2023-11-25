@@ -73,7 +73,7 @@ public class DestroyerAlien extends AlienShip {
 	
 	public void dropBomb() {
 		if (canBomb && game.getRandom().nextDouble() < game.getLevel().getShootFrequency()) {
-			currBomb = new Bomb(this, pos);
+			currBomb = new Bomb(this.game, pos, this);
 			game.addObject(currBomb);
 			canBomb = false;
 		}

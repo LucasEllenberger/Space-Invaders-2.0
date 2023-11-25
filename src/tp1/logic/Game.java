@@ -21,7 +21,7 @@ public class Game implements GameStatus, GameModel, GameWorld {
 	
 	private GameObjectContainer container;
 	private UCMShip player;
-	private AlienManager alienManager;
+	private AlienManager alienManager = new AlienManager(this);
 	private int currentCycle;
 	
 	private long seed;
