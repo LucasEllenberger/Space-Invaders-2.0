@@ -1,10 +1,13 @@
 package tp1.logic.gameobjects;
 
 import tp1.logic.Game;
+import tp1.logic.Move;
 import tp1.logic.Position;
 import tp1.view.Messages;
 
 public class UCMShip extends Ship {
+	private UCMLaser laser;
+	private Shockwave shockwave = new Shockwave(game);
 
 	public UCMShip(Game game, Position pos) {
 		super(game, pos, 3);
@@ -35,5 +38,14 @@ public class UCMShip extends Ship {
 			return true;
 		}
 		return false;
+	}
+
+	public boolean move(Move move) {
+		// TODO Test
+		return Position.updateSafe(this.getPos(), move);
+	}
+	
+	public boolean shockwave() {
+		return shockwave.attack();
 	}
 }

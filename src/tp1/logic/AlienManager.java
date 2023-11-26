@@ -8,10 +8,13 @@ public class AlienManager  {
 	
 	private Game game;
 	private int remainingAliens;
+	private boolean ufo = false;
+	private boolean edge = false;
 	
 	//TODO fill with your code
 	public AlienManager(Game game) {
 		this.game = game;
+		remainingAliens = 0;
 	}
 
 	public  GameObjectContainer initialize() {
@@ -58,6 +61,10 @@ public class AlienManager  {
 		}
 	}
 
+	public boolean shouldMove() {
+		return (edge /*|| (getMetric("wait") == getMetric("speed"))*/);
+	}
+	
 	//TODO fill with your code
 	
 	public int getRemainingAliens() {

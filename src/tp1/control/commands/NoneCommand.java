@@ -28,8 +28,8 @@ public class NoneCommand extends NoParamsCommand {
 
 	@Override
 	public ExecutionResult execute(Game game) {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO Test
+		return new ExecutionResult(true);
 	}
 
 }

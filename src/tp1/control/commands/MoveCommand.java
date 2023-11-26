@@ -3,6 +3,7 @@ package tp1.control.commands;
 import tp1.control.ExecutionResult;
 import tp1.logic.Game;
 import tp1.logic.Move;
+import tp1.logic.Position;
 import tp1.view.Messages;
 
 public class MoveCommand extends Command {
@@ -37,8 +38,12 @@ public class MoveCommand extends Command {
 
 	@Override
 	public ExecutionResult execute(Game game) {
-		//TODO fill with your code
-		return null;
+		//TODO Test
+		if (game.move(move)) {
+			return new ExecutionResult(true);
+		} else {
+			return new ExecutionResult(Messages.MOVEMENT_ERROR);
+		}
 	}
 
 

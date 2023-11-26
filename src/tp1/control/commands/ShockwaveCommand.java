@@ -28,8 +28,12 @@ public class ShockwaveCommand extends NoParamsCommand {
 
 	@Override
 	public ExecutionResult execute(Game game) {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO Test
+		if (game.shockwave()) {
+			return new ExecutionResult(true);
+		} else {
+			return new ExecutionResult(Messages.SHOCKWAVE_ERROR);
+		}
 	}
 
 }

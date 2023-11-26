@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import tp1.logic.gameobjects.Attributes;
 import tp1.logic.gameobjects.GameObject;
 import tp1.logic.gameobjects.Space;
 import tp1.logic.gameobjects.UCMLaser;
@@ -25,7 +26,7 @@ public class Game implements GameStatus, GameModel, GameWorld {
 	private int currentCycle;
 	
 	private long seed;
-	private Move direction = Move.LEFT;
+//	private Move direction = Move.LEFT;
 	private Level level;
 	private Random random;
 	private Space space = new Space();
@@ -161,7 +162,18 @@ public class Game implements GameStatus, GameModel, GameWorld {
 	@Override
 	public String infoToString() {
 		// TODO fill with your code
-		return null;
+		StringBuilder buffer = new StringBuilder();
+		String NEW_LINE = System.lineSeparator();
+		buffer.append(Messages.ucmShipDescription(Messages.UCMSHIP_DESCRIPTION, Attributes.Player.endurance, Attributes.Player.damage))
+		.append(NEW_LINE)
+		.append(Messages.alienDescription(Messages.REGULAR_ALIEN_DESCRIPTION, Attributes.RegularAlien.points, Attributes.RegularAlien.damage, Attributes.RegularAlien.endurance))
+		.append(NEW_LINE)
+		.append(Messages.alienDescription(Messages.DESTROYER_ALIEN_DESCRIPTION, Attributes.DestroyerAlien.points,  Attributes.DestroyerAlien.damage, Attributes.DestroyerAlien.endurance))
+		.append(NEW_LINE)
+		.append(Messages.alienDescription(Messages.UFO_DESCRIPTION, Attributes.Ufo.points,  Attributes.Ufo.damage,  Attributes.Ufo.endurance))
+		.append(NEW_LINE);
+		
+		return buffer.toString();
 	}
 
 	@Override
@@ -215,8 +227,8 @@ public class Game implements GameStatus, GameModel, GameWorld {
 
 	@Override
 	public boolean move(Move move) {
-		// TODO Auto-generated method stub
-		return false;
+		// TODO Test
+		return player.move(move);
 	}
 
 	@Override
@@ -227,7 +239,14 @@ public class Game implements GameStatus, GameModel, GameWorld {
 
 	@Override
 	public void reset() {
-		// TODO Auto-generated method stub
+		// TODO Test
+		this.random = new Random(seed);
+		initGame();
 		return;
+	}
+	
+	@Override
+	public boolean shockwave() {
+		return player.shockwave();
 	}
 }

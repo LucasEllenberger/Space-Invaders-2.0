@@ -6,4 +6,5 @@ public interface GameModel {
 	public void reset();
 	// TODO Add more as needed
 	public boolean isFinished();
+	public boolean shockwave();
 }

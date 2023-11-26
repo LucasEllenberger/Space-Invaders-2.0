@@ -28,8 +28,12 @@ public class ShootCommand extends NoParamsCommand {
 
 	@Override
 	public ExecutionResult execute(Game game) {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO Test
+		if (game.shootLaser()) {
+			return new ExecutionResult(true);
+		} else {
+			return new ExecutionResult(Messages.LASER_ERROR);
+		}
 	}
 
 }

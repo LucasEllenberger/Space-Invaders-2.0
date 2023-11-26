@@ -28,8 +28,9 @@ public class ResetCommand extends NoParamsCommand {
 
 	@Override
 	public ExecutionResult execute(Game game) {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO Test
+		game.reset();
+		return new ExecutionResult(true);
 	}
 
 }

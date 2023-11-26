@@ -1,5 +1,8 @@
 package tp1.control.commands;
 
+import tp1.control.ExecutionResult;
+import tp1.logic.Game;
+
 public abstract class NoParamsCommand extends Command {
 
 	@Override
@@ -9,5 +12,9 @@ public abstract class NoParamsCommand extends Command {
 		}
 		return null;
 	}
-	
+
+//	public ExecutionResult execute(Game game) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}	
 }
