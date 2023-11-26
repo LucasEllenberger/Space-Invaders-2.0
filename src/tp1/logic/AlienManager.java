@@ -2,6 +2,7 @@ package tp1.logic;
 
 import tp1.logic.gameobjects.DestroyerAlien;
 import tp1.logic.gameobjects.RegularAlien;
+import tp1.logic.gameobjects.Ufo;
 
 public class AlienManager  {
 	
@@ -27,7 +28,7 @@ public class AlienManager  {
 	}
 	
 	private void initializeOvni(GameObjectContainer container) {
-		//container.add(new Ufo(game));
+//		container.add(new Ufo(game, null, this));
 	}
 	
 	private void initializeRegularAliens (GameObjectContainer container) {
@@ -41,7 +42,6 @@ public class AlienManager  {
 			for (int j = 0; j < numPerRow; j++) {
 				Position position = new Position(start + j, i + 1);
 				container.add(new RegularAlien(game, position, this));
-				remainingAliens++;
 			}
 		}
 		//		container.add(new RegularAlien(....));
@@ -69,5 +69,12 @@ public class AlienManager  {
 		return false;
 	}
 
+	public void alienDeath() {
+		remainingAliens--;
+	}
+	
+	public void alienSpawn() {
+		remainingAliens++;
+	}
 
 }

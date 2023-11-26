@@ -1,5 +1,6 @@
 package tp1.logic.gameobjects;
 
+import tp1.logic.AlienManager;
 import tp1.logic.Game;
 import tp1.logic.Move;
 import tp1.logic.Position;
@@ -7,17 +8,13 @@ import tp1.view.Messages;
 
 public class Ufo extends EnemyShip {
 
-	public Ufo(Game game, Position pos) {
-		super(game, pos, 1);
+	public Ufo(Game game, Position pos, AlienManager alienManager) {
+		super(game, pos, 1, alienManager);
 		// TODO Auto-generated constructor stub
 	}
 
 	public String getSymbol() {
 		return String.format(Messages.GAME_OBJECT_STATUS, Messages.UFO_SYMBOL, life);
-	}
-
-	public Position getPosition() {
-		return pos;
 	}
 	
 	private void die() {

@@ -89,6 +89,7 @@ public class Messages {
 	//
 	// Game Objects
 	//
+	// TODO: Change from "%2s[02%d]", make sure it's right
 	public static final String GAME_OBJECT_STATUS = "%2s[%02d]";
 
 	public static final String ALIEN_DESCRIPTION = "%s: points='%d', damage='%d', endurance='%d'";

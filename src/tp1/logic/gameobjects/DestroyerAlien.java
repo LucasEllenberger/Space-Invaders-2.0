@@ -10,16 +10,13 @@ public class DestroyerAlien extends AlienShip {
 	
 	private static Move direction = Move.LEFT;
 	private Bomb currBomb;
-	private Game game;
-	private Position position;
-	private int health;
 	private boolean canBomb = true;
-	private AlienManager alienManager;
+//	private AlienManager alienManager;
 	
 	
 	public DestroyerAlien(Game game, Position pos, AlienManager alienManager) {
-		super(game, pos, 1);
-		this.alienManager = alienManager;
+		super(game, pos, 1, alienManager);
+//		this.alienManager = alienManager;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -30,42 +27,50 @@ public class DestroyerAlien extends AlienShip {
 //		game.add(this);
 //	}
 	
+//	public String toString() {
+//		return String.format(Messages.GAME_OBJECT_STATUS, Messages.DESTROYER_ALIEN_SYMBOL, life);
+//	}
+	
 	public String getSymbol() {
-		return String.format(Messages.GAME_OBJECT_STATUS, Messages.DESTROYER_ALIEN_SYMBOL, health);
+		return Messages.DESTROYER_ALIEN_SYMBOL;
 	}
 	
-	public Position getPosition() {
-		return position;
-	}
+//	public boolean isAlive() {
+//		return super.isAlive();
+//	}
 	
-	public static void changeDirection(Move move) {
-		direction = move;
-	}
+//	public Position getPos() {
+//		return super.getPos();
+//	}
+	
+//	Implemented in super class
+//	public static void changeDirection(Move move) {
+//		direction = move;
+//	}
 	
 	public void enableBomb() {
 		canBomb = true;
 	}
 	
 	public void automaticMove() {
-		if (game.shouldMove()) {
-			Position.update(position, direction);
-			if (Position.onBorder(position) && !direction.equals(Move.DOWN)) {
+		if (alienManager.shouldMove()) {
+			Position.update(super.getPos(), direction);
+			if (Position.onBorder(super.getPos()) && !direction.equals(Move.DOWN)) {
 				game.changeState("edge", true);
 			}
 		}
 		dropBomb();
 	}
 	
-	public boolean reduceHealth(int damage)  {
-		this.health -= damage;
-		if (health <= 0) {
-			game.changeMetric("points", Attributes.DestroyerAlien.points);
-			game.changeMetric("aliens", -1);
-			return true;
-		}
-		return false;
-	}
-	
+//	public boolean receiveAttack(EnemyWeapon weapon)  {
+//		this.life -= weapon.getDamage();
+//		if (life <= 0) {
+//			game.changeMetric("points", Attributes.DestroyerAlien.points);
+//			game.changeMetric("aliens", -1);
+//			return true;
+//		}
+//		return false;
+//	}
 	
 	/**
 	 * Attempts to spawn a bomb from the reference ship
@@ -77,5 +82,13 @@ public class DestroyerAlien extends AlienShip {
 			game.addObject(currBomb);
 			canBomb = false;
 		}
+	}
+	
+	@Override
+	public void onDelete() {
+		// TODO Auto-generated method stub
+		super.onDelete();
+		game.changeMetric("points", Attributes.DestroyerAlien.points);
+//		game.changeMetric("aliens", -1);
 	}
 }

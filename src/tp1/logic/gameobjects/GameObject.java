@@ -1,15 +1,16 @@
 package tp1.logic.gameobjects;
 
-import tp1.logic.GameWorld;
+import tp1.logic.Game;
 import tp1.logic.Position;
 
 public abstract class GameObject implements GameItem {
 
 	protected Position pos;
 	protected int life;
-	protected GameWorld game;
+	//TODO Change to GameWorld later
+	protected Game game;
 	
-	public GameObject(GameWorld game, Position pos, int life) {	
+	public GameObject(Game game, Position pos, int life) {	
 		this.pos = pos;
 		this.game = game;
 		this.life = life;
@@ -30,7 +31,7 @@ public abstract class GameObject implements GameItem {
 		return this.pos;
 	}
 
-	
+	public abstract String toString();
 	protected abstract String getSymbol();
 	protected abstract int getDamage();
 	protected abstract int getArmour();

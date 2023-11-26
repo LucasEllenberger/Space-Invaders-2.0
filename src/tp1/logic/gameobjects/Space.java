@@ -47,4 +47,10 @@ public class Space extends GameObject {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return Messages.EMPTY;
+	}
 }

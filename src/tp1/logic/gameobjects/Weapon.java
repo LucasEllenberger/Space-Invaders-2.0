@@ -46,4 +46,10 @@ public class Weapon extends GameObject {
 
 	}
 
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

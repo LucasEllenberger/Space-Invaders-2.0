@@ -19,5 +19,4 @@ public enum  Attributes {
 		this.damage = damage;
 		this.endurance = endurance;
 	}
-
 }

@@ -10,12 +10,9 @@ import tp1.logic.gameobjects.Attributes;
 public class RegularAlien extends AlienShip {
 	
 	private static Move direction = Move.LEFT;
-	private Game game;
-	private Position position;
-	private int life;
 	private int armour = 2;
 	private int damage = 0;
-	private AlienManager alienManager;
+//	private AlienManager alienManager;
 	
 //	public RegularAlien(Game game, Position pos, AlienManager alienManager) {
 //		// TODO TEST!!
@@ -24,39 +21,40 @@ public class RegularAlien extends AlienShip {
 //	}
 	
 	public RegularAlien(Game game, Position pos, AlienManager alienManager) {
-		super(game, pos, 2);
-		this.alienManager = alienManager;
+		super(game, pos, 2, alienManager);
+//		this.alienManager = alienManager;
 //		game.changeMetric("aliens", 1);
 //		game.addObject(this);
 	}
 	
-	public Position getPosition() {
-		return position;
-	}
+//	public static void changeDirection(Move move) {
+//		direction = move;
+//	}
 	
-	public static void changeDirection(Move move) {
-		direction = move;
+	@Override
+	public void computerAction() {
+		return;
 	}
 
 	@Override
 	public void automaticMove() {
 		if (game.shouldMove()) {
-			Position.update(position, direction);
-			if (Position.onBorder(position) && !direction.equals(Move.DOWN)) {
+			Position.update(super.getPos(), direction);
+			if (Position.onBorder(super.getPos()) && !direction.equals(Move.DOWN)) {
 				game.changeState(getSymbol(), null);
 			}
 		}
 	}
 	
-	public boolean reduceHealth(int damage)  {
-		this.life -= damage;
-		if (life <= 0) {
-			game.changeMetric("points", Attributes.RegularAlien.points);
-			game.changeMetric("aliens", -1);
-			return true;
-		}
-		return false;
-	}
+//	public boolean reduceHealth(int damage)  {
+//		this.life -= damage;
+//		if (life <= 0) {
+//			game.changeMetric("points", Attributes.RegularAlien.points);
+//			game.changeMetric("aliens", -1);
+//			return true;
+//		}
+//		return false;
+//	}
 
 	@Override
 	public boolean isOnPosition(Position pos) {
@@ -64,6 +62,11 @@ public class RegularAlien extends AlienShip {
 		return this.pos.equals(pos);
 	}
 
+//	@Override
+//	public String toString() {
+//		return String.format(Messages.GAME_OBJECT_STATUS, getSymbol(), life);
+//	}
+	
 	@Override
 	protected String getSymbol() {
 		// TODO fill with your code
@@ -82,21 +85,21 @@ public class RegularAlien extends AlienShip {
 		return armour;
 	}
 	
-	@Override
-	public boolean receiveAttack(UCMWeapon weapon) {
-		this.life -= weapon.getDamage();
-		if (life <= 0) {
-			onDelete();
-			return true;
-		}
-		return false;
-	}
+//	@Override
+//	public boolean receiveAttack(UCMWeapon weapon) {
+//		this.life -= weapon.getDamage();
+//		if (life <= 0) {
+//			onDelete();
+//			return true;
+//		}
+//		return false;
+//	}
 
 	@Override
 	public void onDelete() {
 		// TODO Auto-generated method stub
+		super.onDelete();
 		game.changeMetric("points", Attributes.RegularAlien.points);
-		game.changeMetric("aliens", -1);
-		game.removeObject(this);
+//		game.changeMetric("aliens", -1);
 	}
 }

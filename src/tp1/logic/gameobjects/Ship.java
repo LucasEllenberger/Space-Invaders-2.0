@@ -46,4 +46,10 @@ public class Ship extends GameObject {
 		return;
 	}
 
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

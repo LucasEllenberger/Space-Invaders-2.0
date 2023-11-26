@@ -30,7 +30,7 @@ public class Game implements GameStatus, GameModel, GameWorld {
 	private Random random;
 	private Space space = new Space();
 	private UCMLaser currentLaser;
-	private Ufo ufo = new Ufo(this, null);
+//	private Ufo ufo = new Ufo(this, null, alienManager);
 //	private GameObject[][] board;
 	private Map<String, Boolean> state = new HashMap<String, Boolean>() {{
         put("laser", false);
@@ -61,7 +61,7 @@ public class Game implements GameStatus, GameModel, GameWorld {
 		//TODO fill with your code
 		this.container = alienManager.initialize();
 		this.player = new UCMShip(this, new Position(DIM_X / 2, DIM_Y - 1));
-		//container.add(player);
+		container.add(player);
 	}
 	
 	/**
@@ -184,7 +184,7 @@ public class Game implements GameStatus, GameModel, GameWorld {
 
 	@Override
 	public boolean aliensWin() {
-		return (player.isAlive() || alienManager.onLastRow());
+		return (!(player.isAlive()) || alienManager.onLastRow());
 //		for (Entity entity : entities) {
 //			if ((entity instanceof RegularAlien || entity instanceof DestroyerAlien) 
 //					&& Position.onLastRow(entity.getPosition())) {
