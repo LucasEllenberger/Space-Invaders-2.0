@@ -23,4 +23,12 @@ public class AlienShip extends EnemyShip {
 		super.onDelete();
 		alienManager.alienDeath();
 	}
+	
+	@Override
+	public void automaticMove() {
+		if (alienManager.shouldMove()) {
+			Position.update(super.getPos(), alienManager.getDirection());
+			alienManager.enableEdge();
+		}
+	}
 }

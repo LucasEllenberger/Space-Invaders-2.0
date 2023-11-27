@@ -122,8 +122,10 @@ public class Game implements GameStatus, GameModel, GameWorld {
 
 	public void update() {
 	    this.currentCycle++;
+	    alienManager.orienter();
 	    this.container.computerActions();
 	    this.container.automaticMoves();
+	    alienManager.resolveWaitTime();
 	}
 
 	// TODO fill with your code
@@ -136,9 +138,9 @@ public class Game implements GameStatus, GameModel, GameWorld {
 	 * @return A boolean representing whether the cycle and speed coincide
 	 */
 	
-	public boolean shouldMove() {
-		return (getState("edge") || (getMetric("wait") == getMetric("speed")));
-	}
+//	public boolean shouldMove() {
+//		return (getState("edge") || (getMetric("wait") == getMetric("speed")));
+//	}
 	
 	public void addObject(GameObject object) {
 	    this.container.add(object);
@@ -233,8 +235,8 @@ public class Game implements GameStatus, GameModel, GameWorld {
 
 	@Override
 	public boolean shootLaser() {
-		// TODO Auto-generated method stub
-		return false;
+		// TODO Test
+		return player.shoot();
 	}
 
 	@Override

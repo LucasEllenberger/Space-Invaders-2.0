@@ -8,6 +8,7 @@ import tp1.view.Messages;
 public class UCMShip extends Ship {
 	private UCMLaser laser;
 	private Shockwave shockwave = new Shockwave(game);
+	private boolean canLaser = true;
 
 	public UCMShip(Game game, Position pos) {
 		super(game, pos, 3);
@@ -34,7 +35,7 @@ public class UCMShip extends Ship {
 	public boolean receiveAttack(EnemyWeapon weapon) {
 		life -= weapon.getDamage();
 		if (life <= 0) {
-//			game.aliensWin();
+//			onDelete();
 			return true;
 		}
 		return false;
@@ -47,5 +48,20 @@ public class UCMShip extends Ship {
 	
 	public boolean shockwave() {
 		return shockwave.attack();
+	}
+	
+	public boolean shoot() {
+		if (canLaser) {
+			Position new_pos = new Position(this.getPos().getCol(), this.getPos().getRow());
+			laser = new UCMLaser(game, new_pos);
+			game.addObject(laser);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public void enableLaser() {
+		canLaser = true;
 	}
 }

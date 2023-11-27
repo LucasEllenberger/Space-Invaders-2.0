@@ -7,14 +7,18 @@ import tp1.logic.gameobjects.Ufo;
 public class AlienManager  {
 	
 	private Game game;
-	private int remainingAliens;
+	private Move dir = Move.LEFT; 
+	private int remainingAliens = 0;
+	private int speed;
+	private int turnsWaited = 0;
 	private boolean ufo = false;
 	private boolean edge = false;
+	private boolean wasLeft = true;
 	
 	//TODO fill with your code
 	public AlienManager(Game game) {
 		this.game = game;
-		remainingAliens = 0;
+		speed = game.getLevel().getSpeed();
 	}
 
 	public  GameObjectContainer initialize() {
@@ -62,13 +66,17 @@ public class AlienManager  {
 	}
 
 	public boolean shouldMove() {
-		return (edge /*|| (getMetric("wait") == getMetric("speed"))*/);
+		return (edge || (turnsWaited == speed));
 	}
 	
 	//TODO fill with your code
 	
 	public int getRemainingAliens() {
 		return remainingAliens;
+	}
+	
+	public Move getDirection() {
+		return dir;
 	}
 
 	public boolean onLastRow() {
@@ -84,4 +92,31 @@ public class AlienManager  {
 		remainingAliens++;
 	}
 
+	public void orienter() {
+		if (shouldMove()) {
+			if (edge) {
+				if (dir.equals(Move.DOWN)) {
+					if (wasLeft) {
+						dir = Move.RIGHT;
+					} else {
+						dir = Move.LEFT;
+					}
+					edge = false;
+				} else {
+					dir = Move.DOWN;
+				}
+			}
+		}
+	}
+	
+	public void resolveWaitTime() {
+		if (shouldMove()) {
+//			if (edge && !(turnsWaited == speed)) {
+//				edge = false;
+//			}
+			turnsWaited = 0;
+		} else {
+			turnsWaited++;
+		}
+	}
 }

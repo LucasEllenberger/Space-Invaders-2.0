@@ -38,12 +38,7 @@ public class RegularAlien extends AlienShip {
 
 	@Override
 	public void automaticMove() {
-		if (game.shouldMove()) {
-			Position.update(super.getPos(), direction);
-			if (Position.onBorder(super.getPos()) && !direction.equals(Move.DOWN)) {
-				game.changeState(getSymbol(), null);
-			}
-		}
+		super.automaticMove();
 	}
 	
 //	public boolean reduceHealth(int damage)  {
@@ -56,11 +51,11 @@ public class RegularAlien extends AlienShip {
 //		return false;
 //	}
 
-	@Override
-	public boolean isOnPosition(Position pos) {
-		// TODO fill with your code
-		return this.pos.equals(pos);
-	}
+//	@Override
+//	public boolean isOnPosition(Position pos) {
+//		// TODO fill with your code
+//		return super.isOnPosition(pos);
+//	}
 
 //	@Override
 //	public String toString() {

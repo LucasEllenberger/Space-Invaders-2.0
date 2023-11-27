@@ -8,7 +8,7 @@ import tp1.view.Messages;
 
 public class DestroyerAlien extends AlienShip {
 	
-	private static Move direction = Move.LEFT;
+	private static Move direction;
 	private Bomb currBomb;
 	private boolean canBomb = true;
 //	private AlienManager alienManager;
@@ -16,6 +16,7 @@ public class DestroyerAlien extends AlienShip {
 	
 	public DestroyerAlien(Game game, Position pos, AlienManager alienManager) {
 		super(game, pos, 1, alienManager);
+		direction = alienManager.getDirection();
 //		this.alienManager = alienManager;
 		// TODO Auto-generated constructor stub
 	}
@@ -53,12 +54,7 @@ public class DestroyerAlien extends AlienShip {
 	}
 	
 	public void automaticMove() {
-		if (alienManager.shouldMove()) {
-			Position.update(super.getPos(), direction);
-			if (Position.onBorder(super.getPos()) && !direction.equals(Move.DOWN)) {
-				game.changeState("edge", true);
-			}
-		}
+		super.automaticMove();
 		dropBomb();
 	}
 	
