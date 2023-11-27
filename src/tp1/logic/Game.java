@@ -62,6 +62,7 @@ public class Game implements GameStatus, GameModel, GameWorld {
 		
 	private void initGame () {	
 		//TODO fill with your code
+		currentCycle = 0;
 		this.container = alienManager.initialize();
 		this.player = new UCMShip(this, new Position(DIM_X / 2, DIM_Y - 1));
 		container.add(player);
