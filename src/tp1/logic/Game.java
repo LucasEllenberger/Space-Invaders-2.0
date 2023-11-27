@@ -125,8 +125,6 @@ public class Game implements GameStatus, GameModel, GameWorld {
 
 	public void update() {
 	    this.currentCycle++;
-	    System.out.print("Current cycle: ");
-	    System.out.println(currentCycle);
 	    alienManager.orienter();
 	    this.container.computerActions();
 	    this.container.automaticMoves();
