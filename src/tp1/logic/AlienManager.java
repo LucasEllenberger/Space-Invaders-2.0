@@ -14,6 +14,7 @@ public class AlienManager  {
 	private boolean ufo = false;
 	private boolean edge = false;
 	private boolean wasLeft = true;
+	private boolean lastRow = false;
 	
 	//TODO fill with your code
 	public AlienManager(Game game) {
@@ -44,7 +45,7 @@ public class AlienManager  {
 		int numRegRows = game.getLevel().getNumRowsRegularAliens();
 		int numRegAliens = game.getLevel().getNumRegularAliens();
 		int numPerRow = numRegAliens / numRegRows;
-		int start = (9 - numPerRow) / 2;
+		int start = (Game.DIM_X - numPerRow) / 2;
 		for (int i = 0; i < numRegRows; i++) {
 			for (int j = 0; j < numPerRow; j++) {
 				Position position = new Position(start + j, i + 1);
@@ -57,7 +58,7 @@ public class AlienManager  {
 	private void initializeDestroyerAliens(GameObjectContainer container) {
 		//TODO fill with your code
 		int numDesAliens = game.getLevel().getNumDestroyerAliens();
-		int start = (9 - numDesAliens) / 2;
+		int start = (Game.DIM_X - numDesAliens) / 2;
 		int row = game.getLevel().getNumRowsRegularAliens() + 1;
 		for (int i = 0; i < numDesAliens; i++) {
 			Position position = new Position(start + i, row);
@@ -78,10 +79,18 @@ public class AlienManager  {
 	public Move getDirection() {
 		return dir;
 	}
+	
+	public void enableEdge() {
+		edge = true;
+	}
+	
+	public void enableLastRow() {
+		lastRow = true;
+	}
 
 	public boolean onLastRow() {
 		// TODO Auto-generated method stub
-		return false;
+		return lastRow;
 	}
 
 	public void alienDeath() {
@@ -98,8 +107,10 @@ public class AlienManager  {
 				if (dir.equals(Move.DOWN)) {
 					if (wasLeft) {
 						dir = Move.RIGHT;
+						wasLeft = false;
 					} else {
 						dir = Move.LEFT;
+						wasLeft = true;
 					}
 					edge = false;
 				} else {

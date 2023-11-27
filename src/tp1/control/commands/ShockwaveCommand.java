@@ -30,6 +30,7 @@ public class ShockwaveCommand extends NoParamsCommand {
 	public ExecutionResult execute(Game game) {
 		// TODO Test
 		if (game.shockwave()) {
+			game.update();
 			return new ExecutionResult(true);
 		} else {
 			return new ExecutionResult(Messages.SHOCKWAVE_ERROR);

@@ -50,6 +50,10 @@ public class UCMShip extends Ship {
 		return shockwave.attack();
 	}
 	
+	public boolean getShockwave() {
+		return shockwave.getShockwave();
+	}
+	
 	public boolean shoot() {
 		if (canLaser) {
 			Position new_pos = new Position(this.getPos().getCol(), this.getPos().getRow());

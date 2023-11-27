@@ -29,7 +29,12 @@ public class NoneCommand extends NoParamsCommand {
 	@Override
 	public ExecutionResult execute(Game game) {
 		// TODO Test
+		game.update();
 		return new ExecutionResult(true);
 	}
 
+	@Override
+	public boolean matchCommandName(String name) {
+		return super.matchCommandName(name) || name.equals("");
+	}
 }

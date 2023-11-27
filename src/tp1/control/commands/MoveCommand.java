@@ -40,6 +40,7 @@ public class MoveCommand extends Command {
 	public ExecutionResult execute(Game game) {
 		//TODO Test
 		if (game.move(move)) {
+			game.update();
 			return new ExecutionResult(true);
 		} else {
 			return new ExecutionResult(Messages.MOVEMENT_ERROR);

@@ -15,6 +15,10 @@ public class Shockwave extends UCMWeapon {
 	public void enableShockwave() {
 		shockwave = true;
 	}
+	
+	public boolean getShockwave() {
+		return shockwave;
+	}
 
 	public boolean attack() {
 		if (shockwave) {

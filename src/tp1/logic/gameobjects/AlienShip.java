@@ -13,6 +13,15 @@ public class AlienShip extends EnemyShip {
 		alienManager.alienSpawn();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public boolean onLastRow() {
+		return super.getPos().getRow() == (Game.DIM_Y - 1);
+	}
+	
+	public boolean onEdge() {
+		int currCol = super.getPos().getCol();
+		return (currCol == 0 || currCol == (Game.DIM_X - 1));
+	}
 
 	public static void changeDirection(Move move) {
 		direction = move;
@@ -27,8 +36,15 @@ public class AlienShip extends EnemyShip {
 	@Override
 	public void automaticMove() {
 		if (alienManager.shouldMove()) {
+			boolean before = onEdge();
 			Position.update(super.getPos(), alienManager.getDirection());
-			alienManager.enableEdge();
+			boolean after = onEdge();
+			if (onLastRow()) {
+				alienManager.enableLastRow();
+			}
+			if (!before && after) {
+				alienManager.enableEdge();
+			}
 		}
 	}
 }

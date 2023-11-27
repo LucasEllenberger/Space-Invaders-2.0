@@ -22,7 +22,7 @@ public class Game implements GameStatus, GameModel, GameWorld {
 	
 	private GameObjectContainer container;
 	private UCMShip player;
-	private AlienManager alienManager = new AlienManager(this);
+	private AlienManager alienManager;
 	private int currentCycle;
 	
 	private long seed;
@@ -39,6 +39,7 @@ public class Game implements GameStatus, GameModel, GameWorld {
         put("ufo", false);
         put("shockwave", false);
         put("running", true);
+        put("finished", false);
    }};
 	private Map<String, Integer> metrics = new HashMap<String, Integer>() {{
 	     put("points", 0);
@@ -55,6 +56,7 @@ public class Game implements GameStatus, GameModel, GameWorld {
 		this.level = level;
         this.seed = seed;
         this.random = new Random(seed);
+        this.alienManager = new AlienManager(this);
 		initGame();
 	}
 		
@@ -116,12 +118,15 @@ public class Game implements GameStatus, GameModel, GameWorld {
 	}
 
 	public void exit() {
-		// TODO fill with your code
+		// TODO Want to remove state fields
 		changeState("finished", true);
+		return;
 	}
 
 	public void update() {
 	    this.currentCycle++;
+	    System.out.print("Current cycle: ");
+	    System.out.println(currentCycle);
 	    alienManager.orienter();
 	    this.container.computerActions();
 	    this.container.automaticMoves();
@@ -185,7 +190,7 @@ public class Game implements GameStatus, GameModel, GameWorld {
 		String SPACE = " ";
 		buffer.append(Messages.LIFE).append(SPACE).append(player.getLife()).append(NEW_LINE)
 		.append(Messages.POINTS).append(SPACE).append(getMetric("points")).append(NEW_LINE)
-		.append(Messages.SHOCKWAVE).append(SPACE).append(getState("shockwave") ? "ON" : "OFF").append(NEW_LINE);
+		.append(Messages.SHOCKWAVE).append(SPACE).append(player.getShockwave() ? "ON" : "OFF").append(NEW_LINE);
 		return buffer.toString();
 //		return null;
 	}
